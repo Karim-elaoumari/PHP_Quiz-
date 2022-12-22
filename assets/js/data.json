@@ -1,0 +1,25 @@
+[
+    {
+        "question" : "wht is php stands for ? 1",
+        "answer"   : ["php is a compiled language 1","php is not a language of programming 1","php is not a server side language 1","php is a server side language 1"],
+        "correct"   : 4
+    },
+    {
+        "question" : "wht is php stands for ? 2",
+        "answer"   : ["php is a compiled language 2","php is not a language of programming 2","php is not a server side language 2","php is a server side language 2"],
+        "correct"   : [2,1]
+    },
+    {
+        "question" : "wht is php stands for ? 3",
+        "answer"   : ["php is a compiled language 3","php is not a language of programming 3","php is not a server side language 3","php is a server side language 3"],
+        "correct"   : 4
+
+    },
+    {
+        "question" : "wht is php stands for ? 4",
+        "answer"   : ["php is a compiled language 4","php is not a language of programming 4","php is not a server side language 4","php is a server side language 4"],
+        "correct"   : 4
+
+    }
+
+]

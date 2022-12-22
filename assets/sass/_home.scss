@@ -1,0 +1,79 @@
+$color-primary : white;
+$color-secendry:   #6949FF;
+$regulare_px :5px;
+$font-family :  'Fredoka One', cursive;
+
+.logo{
+   @extend .color-primary;
+   font-size : $regulare_px *6;
+   margin-top: 50px;
+   padding-top:100px;
+}
+.img_vector{
+    width:200px;
+    @include change_width(400px);
+}
+.body-home{
+    background-color: $color-primary;
+    width: auto;
+}
+
+.brand-box {
+    height: 45px;
+    width: 100%;
+    text-align: center;
+    background-color: $color-secendry;
+    clip-path: polygon(0 0, 100% 0, 50% 20vh, 0 0%);
+    border-radius: 0px 0px 100px 100px;
+}
+.brand {
+    font-size: $regulare_px*4;
+}
+
+.text-box{
+    
+    text-align: center;
+}
+.heading-primary{
+    @extend .color-secendry;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+    margin-bottom: 30px;
+}
+.heading-primary-main {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    @include change_font($regulare_px*5);
+}
+.heading-primary-sub {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 7.4px;
+    @include change_font(18px);
+}
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 10px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: relative;
+}
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.btn:active{
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.btn-primary{
+    @extend .color-primary;
+    background-color: $color-secendry;
+    font-size: $regulare_px*3;
+}

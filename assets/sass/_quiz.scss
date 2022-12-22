@@ -1,0 +1,110 @@
+$color-secendry:   #6949FF;
+$color-fail: rgb(249, 109, 15);
+$color-success : rgb(71, 200, 71);
+.color-fail{
+    background-color: $color-fail;
+}
+.color-seccess{
+    background-color: $color-success ;
+}
+.color-regular{
+    background-color: #b65ef1;
+}
+.color-selected{
+  background-color: #930bed;
+}
+.container{
+  background-color: rgb(255, 252, 252);
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+  width:95%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  @include change_width(40%);
+  text-align: center;
+  margin-top: 30px;
+  color: $color-secendry;
+    
+}
+.card{
+    margin: auto;
+    margin-top: 10px;
+    width:90%;
+    font-weight:50px;
+    min-height: 60px;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: rgb(245, 244, 248);
+}
+.card:active{
+    box-shadow: #ce93f5 5px 5px 5px;
+}
+
+.w3-progress-container{
+    margin-left: 10px;
+    margin: auto;
+    width:90%;
+    @include change_width(40%);
+    height:1em;
+    position:relative;
+    background-color:#ce93f5}
+.w3-progressbar{background-color:$color-secendry;height:100%;position:absolute;line-height:inherit;transition-delay: 1s;}
+.w3-round-xlarge{border-radius:16px}
+.question{
+    color: $color-secendry;
+    margin-top: 20px;
+}
+
+
+// timmer
+ 
+  .base-timer__label.orange {
+    color: orange;
+  }
+  
+  .base-timer__label.red {
+    color: red;
+  }
+
+  .base-timer__label {
+    font-size: 20px;
+  }
+  .flex{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width:90%;
+    @include change_width(40%);
+
+  }
+  .btn-primary{
+  display: inline-block;
+  outline: 0;
+  margin-top: 8px;
+  cursor: pointer;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 6px;
+  color: #ffffff;
+  background-color: #2ea44f!important;
+  border-color: #1b1f2326;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+  :hover {
+      background-color: #2c974b;
+      border-color: #1b1f2326;
+      transition-duration: 0.1s;
+  }
+}
+
+
+
+
+
+
