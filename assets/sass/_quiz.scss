@@ -1,6 +1,4 @@
-$color-secendry:   #6949FF;
-$color-fail: rgb(249, 109, 15);
-$color-success : rgb(71, 200, 71);
+
 .color-fail{
     background-color: $color-fail;
 }
@@ -8,10 +6,10 @@ $color-success : rgb(71, 200, 71);
     background-color: $color-success ;
 }
 .color-regular{
-    background-color: #b65ef1;
+    background-color: $color-regulare;
 }
 .color-selected{
-  background-color: #930bed;
+  background-color: $color-secendry;
 }
 .container{
   background-color: rgb(255, 252, 252);
@@ -30,6 +28,7 @@ $color-success : rgb(71, 200, 71);
     margin: auto;
     margin-top: 10px;
     width:90%;
+    border: black 3px solid;
     font-weight:50px;
     min-height: 60px;
     border-radius: 10px;
@@ -38,18 +37,18 @@ $color-success : rgb(71, 200, 71);
     color: rgb(245, 244, 248);
 }
 .card:active{
-    box-shadow: #ce93f5 5px 5px 5px;
+    box-shadow: $color-hidden 5px 5px 5px;
 }
-
 .w3-progress-container{
     margin-left: 10px;
     margin: auto;
     width:90%;
     @include change_width(40%);
     height:1em;
+    border: black 3px solid;
     position:relative;
-    background-color:#ce93f5}
-.w3-progressbar{background-color:$color-secendry;height:100%;position:absolute;line-height:inherit;transition-delay: 1s;}
+    background-color:$color-hidden}
+.w3-progressbar{background-color:$color-secendry;height:100%;position:absolute;line-height:inherit;transition: width 2s;}
 .w3-round-xlarge{border-radius:16px}
 .question{
     color: $color-secendry;
@@ -58,9 +57,8 @@ $color-success : rgb(71, 200, 71);
 
 
 // timmer
- 
   .base-timer__label.orange {
-    color: orange;
+    color: rgb(245, 146, 32);
   }
   
   .base-timer__label.red {
@@ -102,9 +100,21 @@ $color-success : rgb(71, 200, 71);
       transition-duration: 0.1s;
   }
 }
-
-
-
-
-
-
+#progressTime {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  width:90%;
+  height: 1em;
+  border: black 3px solid;
+  background-color: $headline-color;
+  margin: auto;
+  margin-top: 5px;
+  }
+  
+#BarTime {
+    width:100%;
+    height: 100%;
+    background-color:$color-secendry;
+    border-radius: 10px;
+}

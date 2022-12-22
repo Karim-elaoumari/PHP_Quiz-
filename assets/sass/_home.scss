@@ -1,8 +1,6 @@
-$color-primary : white;
-$color-secendry:   #6949FF;
+
 $regulare_px :5px;
 $font-family :  'Fredoka One', cursive;
-
 .logo{
    @extend .color-primary;
    font-size : $regulare_px *6;

@@ -1,77 +1,30 @@
-// Credit: Mateusz Rybczonec
-
-const FULL_DASH_ARRAY = 283;
-const WARNING_THRESHOLD = 10;
-const ALERT_THRESHOLD = 5;
-
-const COLOR_CODES ={
-  info: {
-    color: "green"
-  },
-  warning: {
-    color: "orange",
-    threshold: WARNING_THRESHOLD
-  },
-  alert: {
-    color: "red",
-    threshold: ALERT_THRESHOLD
-  }
-};
-
-const TIME_LIMIT = 30;
-let timePassed = 0;
-let timeLeft = TIME_LIMIT;
-    document.getElementById("app").innerHTML =`
-<div class="base-timer">CountDown: 
-  <span id="base-timer-label" class="base-timer__label">${formatTime(
-    timeLeft
-  )}</span>
-</div>
-`;
-function reloadTimer(){
-  onTimesUp();
-  timePassed = -1;
-  timeLeft = TIME_LIMIT;
-  const { alert, warning, info } = COLOR_CODES;
-  document.getElementById("base-timer-label").classList.remove(alert.color);
-  document.getElementById("base-timer-label").classList.add(info.color);
-  startTimer();
-}
-function onTimesUp() {
-  clearInterval(timerInterval);
-}
-function startTimer() {
-    timerInterval = setInterval(() => {
-    timePassed = timePassed += 1;
-    timeLeft = TIME_LIMIT - timePassed;
-    document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
-    setRemainingPathColor(timeLeft);
-
-    if (timeLeft === 0) {
-      onTimesUp();
+let id_timer;
+function move(deley) {
     
-      checkAnswer('<div>');
-    }
-  }, 1000);
-}
-function formatTime(time){
-  const minutes = Math.floor(time / 60);
-  let seconds = time % 60;
+    let barTime = document.getElementById("BarTime");
+    let width = 100;
+    let smout = 0.01;
+    if(deley <10) smout = 0.1;
 
-  if (seconds < 10) {
-    seconds = `0${seconds}`;
-  }
-  return `${minutes}:${seconds}`;
-}
-function setRemainingPathColor(timeLeft) {
-  const { alert, warning, info } = COLOR_CODES;
-  if (timeLeft <= alert.threshold) {
-    document.getElementById("base-timer-label").classList.remove(warning.color);
-    document.getElementById("base-timer-label").classList.add(alert.color);
-  } else if (timeLeft <= warning.threshold) {
-    document.getElementById("base-timer-label").classList.remove(info.color);
-    document.getElementById("base-timer-label").classList.add(warning.color);
-  }
+    newDellay = (deley*1000*smout)/100;
+    clearInterval(id_timer);
+    id_timer = setInterval(frame, newDellay);
+    function frame() {
+        if (width <=0) {
+            clearInterval(id_timer);
+            timerfail();
+            
+            i = 0;
+        } else {
+            width-=smout;
+            barTime.style.width = width + "%";
+            if(width<=65 && width>25 ) barTime.style.backgroundColor = "#fde24f";
+            else if(width<=35) barTime.style.backgroundColor = "red";
+            else{
+              barTime.style.backgroundColor = "#930bed";
+            }
+        }
+    }
 }
 function adaptProgress(lenArr,done){
   let progressRange = done*(100/lenArr)+"%";
@@ -112,8 +65,8 @@ let selected=[];
 function showQuestion(arrObj){
        if(count<arrObj.length){
         correct =arrObj[range[count]].correct;
-        document.getElementById("question").innerText =arrObj[range[count]].question;
         document.getElementById("answers").innerHTML="";
+        document.getElementById("question").innerText =arrObj[range[count]].question;
         if(Array.isArray(correct)){ 
           for(let i=0;i<arrObj.length;i++){
             document.getElementById("answers").innerHTML+=`
@@ -141,7 +94,37 @@ function showQuestion(arrObj){
       else{
         document.getElementById("section").innerHTML=`<h2 class='center' style="margin-top:40px">You have finished Questions</h2>
         <h3 style="color:green;margin-top:20px">Your score is : ${totalcorrect}/${arrObj.length}  </h3>
-        <div style="margin-top:20px">
+        <div style="margin-top:20px center">
+        `;
+        let corectRange = (totalcorrect*100)/arrObj.length;
+        if(corectRange<=25){
+          document.getElementById("section").innerHTML+=`
+        <img src="img/Frame-focus.png" class="img_vector center"  alt="">
+        <h3 class="center"> Focus more you can do it</h3>
+        `;
+
+        }else if(corectRange<=55){
+          document.getElementById("section").innerHTML+=`
+        <img src="img/Frame-good.png" class="img_vector center"  alt="">
+        <h3 class="center"> Good job continue</h3>
+        `;
+
+        }
+        else if(corectRange<=90){
+          document.getElementById("section").innerHTML+=`
+        <img src="img/Frame-exelent.png" class="img_vector center"  alt="">
+        <h3 class="center"> Exelent near to be Master</h3>
+        `;
+
+        }
+        else{
+          document.getElementById("section").innerHTML+=`
+          <img src="img/Frame-boos.png" class="img_vector center"  alt="">
+            <h3 class="center"> You are the Master</h3>
+          `;
+
+        }
+        document.getElementById("section").innerHTML+=` <br>
         <a href="quiz.html" class="button-34"  role="button">Restart Quiz</a>
         <a href="index.html" class="button-34" style="margin-left:15px;" role="button">Home</a>
         </div>
@@ -166,6 +149,14 @@ function randomUniqueNum(outputCount) {
   }
   return result;
 }
+function timerfail(){
+  adaptProgress(arrObj.length,count);
+  sleep(500).then(() => {
+    move(28);
+    showQuestion(arrObj);
+});  
+
+}
 function checkAnswer(tag){
   if(correct==tag.id){
     tag.setAttribute("class", "color-seccess card");
@@ -173,21 +164,15 @@ function checkAnswer(tag){
   }else{
     try{
       tag.setAttribute("class", "color-fail card");}
-      
     catch{
     }
   }
-  sleep(500).then(() => {
-    adaptProgress(arrObj.length,count);
+  adaptProgress(arrObj.length,count);
+  sleep(700).then(() => {
     if(count<arrObj.length){
-    reloadTimer();
-
-    }
+    move(28);}
     showQuestion(arrObj);
-      
-    
 });  
-  
 }
 function addSelected(tag){
   selected.push(tag.id);
@@ -195,7 +180,6 @@ function addSelected(tag){
   tag.setAttribute("onclick", "cancelSelected(this)");
   console.log(selected);
 }
-
 function cancelSelected(tag){
   tag.setAttribute("class", "color-regular card");
   tag.setAttribute("onclick", "addSelected(this)");
@@ -210,16 +194,27 @@ function cancelSelected(tag){
 function checkMultiple(){
   if(arrObj[range[count-1]].correct.sort().join() == selected.sort().join()){
     totalcorrect+=1;
+    for(i of  selected){
+      document.getElementById(i).setAttribute("class", "color-seccess card");
+    }
   }
-  sleep(500).then(() => {
-    adaptProgress(arrObj.length,count);
-    if(count<arrObj.length){
-      reloadTimer();
-      alert("good");
-      }
-    showQuestion(arrObj);
- 
+  else{
+    let corectar= arrObj[range[count-1]].correct
+    for(i of selected){
+        if(corectar.find(elem => elem ==i)){
+          document.getElementById(i).setAttribute("class", "color-seccess card");
+        }
+        else{
+          document.getElementById(i).setAttribute("class", "color-fail card");
+        }
+    }
+  }
+  adaptProgress(arrObj.length,count);
+  sleep(700).then(() => {
     
+    if(count<arrObj.length){
+    move(28);}
+    showQuestion(arrObj);
 });  
 }
 

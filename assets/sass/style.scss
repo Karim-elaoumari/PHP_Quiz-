@@ -1,8 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-
-$color-primary : white;
-$color-secendry:   #6949FF;
+@import "colors";
 $regulare_px :5px;
 $font-family :  'Fredoka One', cursive;
 *{
@@ -25,6 +23,9 @@ $font-family :  'Fredoka One', cursive;
 .center{
     margin: auto;
 }
+.margin-regulare{
+  margin-top:20px;
+}
 @mixin change_width($size){
     @media screen and (min-width: 750px){
        width: $size;
@@ -35,151 +36,6 @@ $font-family :  'Fredoka One', cursive;
        font-size: $size;
     }
 }
-// -----------------------------------------------------------------------------
-$column-count: 12 !default;
-$gutter-size: 0.5rem !default;
-$medium: 40em; //640px
-$large: 64em; //1024px
-
-// Find the width of 1 column, based upon the column count
-// -----------------------------------------------------------------------------
-@function find_column_width($columns: $column-count) {
-  $column-width: (100% / $columns);
-
-  @return $column-width;
-}
-
-// Create a grid container to house the columns
-// -----------------------------------------------------------------------------
-@mixin grid($nested: false, $gutters: true) {
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-
-  @if $nested {
-    flex: 0 1 auto;
-  }
-
-  @if $gutters {
-    > * {
-      padding-left: $gutter-size;
-      padding-right: $gutter-size;
-      box-sizing: border-box;
-    }
-  }
-}
-
-// Create a column of the grid
-// -----------------------------------------------------------------------------
-@mixin column($columns: 0, $md: null, $lg: null) {
-  $width: find_column_width();
-  $flex-basis: $width * $columns;
-
-  // Setting $columns = 0 will set the column to be auto width and fill available space
-  @if ($columns == 0) {
-    flex: 1 0 0;
-    width: auto;
-  } @else {
-    flex: 0 0 $flex-basis;
-    min-width: $flex-basis;
-  }
-
-  // Set the column width on medium screens
-  @if ($md != null) {
-    @media screen and (min-width: $medium) {
-      $flex-basis: $width * $md;
-      @if ($md == 0) {
-        flex: 1 0 0;
-        width: auto;
-      } @else {
-        flex: 0 0 $flex-basis;
-        min-width: $flex-basis;
-      }
-    }
-  }
-
-  // Set the column width on large screens
-  @if ($lg != null) {
-    @media screen and (min-width: $large) {
-      $flex-basis: $width * $lg;
-      @if ($lg == 0) {
-        flex: 1 0 0;
-        width: auto;
-      } @else {
-        flex: 0 0 $flex-basis;
-        min-width: $flex-basis;
-      }
-    }
-  }
-}
-
-// Create a column for a specific breakpoint
-// Never needed if purely using grid as mixins
-// -----------------------------------------------------------------------------
-@mixin mq-column($breakpoint: 'md', $columns: 0) {
-  $width: find_column_width();
-  $flex-basis: $width * $columns;
-
-  @if ($breakpoint == 'lg') {
-    @media screen and (min-width: $large) {
-      @if ($columns == 0) {
-        flex: 1 0 0;
-        width: auto;
-      } @else {
-        flex: 0 0 $flex-basis;
-        min-width: $flex-basis;
-      }
-    }
-  } @else {
-    @media screen and (min-width: $medium) {
-      @if ($columns == 0) {
-        flex: 1 0 0;
-        width: auto;
-      } @else {
-        flex: 0 0 $flex-basis;
-        min-width: $flex-basis;
-      }
-    }
-  }
-}
-
-// Demo Styles
-.box {
-  background-color: #2196F3;
-  color: #fff;
-  height: 50px;
-  text-align: center;
-}
-
-.row {
-  @include grid();
-}
-
-.column {
-  @include column();
-}
-
-// Make some base columns
-@for $i from 1 through 12 {
-  .sm-col-#{$i} {
-    @include column($i);
-  }
-}
-
-// Make some base columns for medium
-@for $i from 1 through 12 {
-  .md-col-#{$i} {
-    @include mq-column('md', $i);
-  }
-}
-
-// Make some base columns for large
-@for $i from 1 through 12 {
-  .lg-col-#{$i} {
-    @include mq-column('lg', $i);
-  }
-}
-
 @import "quiz";
 @import "home";
 

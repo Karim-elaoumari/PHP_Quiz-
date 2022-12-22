@@ -26,7 +26,9 @@
   switch (value){
     case "defeat":
     sleep(1000).then(()=> {
-        startTimer();
+        move(28);
+        var audio = new Audio('../../timer.mp3');
+        audio.play();
     });  
       break;
     default:
@@ -46,6 +48,10 @@
             <div class="">
                 <div class="w3-progress-container w3-round-xlarge" style="margin-top:10px;">
                     <div class="w3-progressbar w3-round-xlarge" id="Progress_bar"style="width:0%"></div>
+                </div>
+                 <p class="center margin-regulare">Timer:</p>
+                <div id="progressTime">
+                    <div id="BarTime"></div>
                 </div>
                 <div id="app"></div>
             </div>
