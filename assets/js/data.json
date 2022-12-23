@@ -11,8 +11,8 @@
     },
     {
         "question" : "wht is php stands for ? 3",
-        "answer"   : ["php is a compiled language 3","php is not a language of programming 3","php is not a server side language 3","php is a server side language 3"],
-        "correct"   : 4
+        "answer"   : ["php is not a language of programming 3","php is not a server side language 3","php is a server side language 3"],
+        "correct"   : 3
 
     },
     {

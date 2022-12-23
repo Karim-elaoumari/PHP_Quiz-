@@ -1,9 +1,20 @@
+// variables globale-----------------------
 let id_timer;
+let arrObj=[];
+let range=[];
+let count = 0;
+let correct=null;
+let totalcorrect=0;
+let selected=[];
+let arrRange=[];
+// variables globale-----------------------
+
+//  mover timer ---------------------------
 function move(deley) {
     
     let barTime = document.getElementById("BarTime");
     let width = 100;
-    let smout = 0.01;
+    let smout = 0.1;
     if(deley <10) smout = 0.1;
 
     newDellay = (deley*1000*smout)/100;
@@ -13,6 +24,7 @@ function move(deley) {
         if (width <=0) {
             clearInterval(id_timer);
             timerfail();
+            
             
             i = 0;
         } else {
@@ -26,51 +38,37 @@ function move(deley) {
         }
     }
 }
+
+//  adapt progress bar --------------------
 function adaptProgress(lenArr,done){
   let progressRange = done*(100/lenArr)+"%";
   document.getElementById("Progress_bar").style.width=progressRange;
 }
-// function buttonHandler() {
-//   // First create an XMLHttprequest object
-//   const xhr = new XMLHttpRequest();
-//   xhr.onreadystatechange = function() {
-//     if(this.readyState===4 && this.status===200){
-
-//       let obj = JSON.parse(this.responseText);
-
-//       console.log(obj);
-//     }
-//   }
-//   xhr.open("GET","assets/js/data.json",true);
-//   xhr.send();
-// }
-// ajax get questions 
-let arrObj=[];
-let range=[];
+// ajax get questions  arr objects-----------------
 function getJson_data(){
-  // First create an XMLHttprequest object
   const xhr = new XMLHttpRequest();
-  xhr.onload = function() {
+  xhr.onreadystatechange = function() {
+   if(this.readyState===4 && this.status===200){
     arrObj = JSON.parse(this.responseText);
-    range = randomUniqueNum(arrObj.length-1);
+    randoom(arrObj.length);
+    range = arrRange;
     showQuestion(arrObj);
+   }
   }
   xhr.open("GET", "assets/js/data.json", true);
   xhr.send();
 }
-let count = 0;
-let correct=null;
-let totalcorrect=0;
-let selected=[];
+// ajax get questions  arr objects-----------------
+
 function showQuestion(arrObj){
        if(count<arrObj.length){
         correct =arrObj[range[count]].correct;
         document.getElementById("answers").innerHTML="";
         document.getElementById("question").innerText =arrObj[range[count]].question;
         if(Array.isArray(correct)){ 
-          for(let i=0;i<arrObj.length;i++){
+          for(let i=0;i<arrObj[range[count]].answer.length;i++){
             document.getElementById("answers").innerHTML+=`
-            <div onclick="addSelected(this)" class="color-regular card" id="${i+1}">
+            <div onclick="addSelected(this)" name="card" class="card color-regular " id="${i+1}">
                     ${arrObj[range[count]].answer[i]}
             </div>
             `;
@@ -81,9 +79,9 @@ function showQuestion(arrObj){
             `;
         }
         else{
-          for(let i=0;i<arrObj.length;i++){
+          for(let i=0;i<arrObj[range[count]].answer.length;i++){
             document.getElementById("answers").innerHTML+=`
-            <div onclick="checkAnswer(this)"class="color-regular card" id="${i+1}"> 
+            <div onclick="checkAnswer(this)" name="card" class="card color-regular" id="${i+1}"> 
                     ${arrObj[range[count]].answer[i]}
             </div>
             `;
@@ -133,47 +131,51 @@ function showQuestion(arrObj){
 }
 getJson_data();
 
-function randomUniqueNum(outputCount) {
-
-  let arr = []
-  for (let i = 0; i <= outputCount; i++) {
-    arr.push(i)
-  }
-
-  let result = [];
-
-  for (let i = 0; i <= outputCount; i++) {
-    const random = Math.floor(Math.random() * (outputCount - i));
-    result.push(arr[random]);
-    arr[random] = arr[outputCount - i];
-  }
-  return result;
+//  randooomm---------------------------------------
+function randoom(max){
+let newnum;
+for(let i=1;i<=max;i++){
+ newnum =  Math.floor(Math.random() * (max));
+ while (arrRange.includes(newnum)){
+  newnum =  Math.floor(Math.random() * (max));
+  
+ }
+ arrRange.push(newnum);
 }
+}
+//  randooomm---------------------------------------
+
+// end timer ---------------------------------------
 function timerfail(){
   adaptProgress(arrObj.length,count);
   sleep(500).then(() => {
-    move(28);
+    move(29);
     showQuestion(arrObj);
 });  
-
 }
+// end timer ---------------------------------------
 function checkAnswer(tag){
+ for(let i=1;i<=arrObj[range[count-1]].answer.length;i++){
+  document.getElementById(i).setAttribute("onclick","");
+ }
   if(correct==tag.id){
     tag.setAttribute("class", "color-seccess card");
     totalcorrect+=1;
   }else{
-    try{
-      tag.setAttribute("class", "color-fail card");}
-    catch{
+      tag.setAttribute("class", "color-fail card");
     }
-  }
   adaptProgress(arrObj.length,count);
   sleep(700).then(() => {
     if(count<arrObj.length){
-    move(28);}
+    move(29);}
     showQuestion(arrObj);
 });  
 }
+// end timer ---------------------------------------
+
+
+
+// add cancel selected choices----------------------
 function addSelected(tag){
   selected.push(tag.id);
   tag.setAttribute("class", "color-selected card");
@@ -191,6 +193,11 @@ function cancelSelected(tag){
   }
   console.log(selected);
 }
+// add cancel selected choices----------------------
+
+
+
+// check selected choices---------------------------
 function checkMultiple(){
   if(arrObj[range[count-1]].correct.sort().join() == selected.sort().join()){
     totalcorrect+=1;
@@ -211,13 +218,12 @@ function checkMultiple(){
   }
   adaptProgress(arrObj.length,count);
   sleep(700).then(() => {
-    
     if(count<arrObj.length){
-    move(28);}
+    move(29);}
     showQuestion(arrObj);
 });  
 }
-
+// check selected choices---------------------------
 
 
 
