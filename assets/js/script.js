@@ -2,18 +2,9 @@
 
 let img = document.getElementById('img_change')
 function change(){
-    sleep(200).then(() => {
-        img.setAttribute("src","img/Frame2.png");
-    });  
+    setTimeout(() => { img.setAttribute("src","img/Frame2.png");}, 300);
    
 }
-function change1(){
-    sleep(300).then(() => {
-        img.setAttribute("src","img/Frame.png");
-        
-    });  
+let change1= ()=>{
+    setTimeout(() => { img.setAttribute("src","img/Frame.png");}, 300);
 }
-function sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
-

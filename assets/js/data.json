@@ -1,24 +1,36 @@
 [
     {
-        "question" : "wht is php stands for ? 1",
-        "answer"   : ["php is a compiled language 1","php is not a language of programming 1","php is not a server side language 1","php is a server side language 1"],
-        "correct"   : 4
+        "question" : "Que signifie PHP?",
+        "answer"   : ["PHP Hypertext Preprocessor","Pretext Hypertext Processor","Preprocessor Home Page","Pretext Hypertext Processor"],
+        "correct"   : 1
     },
     {
-        "question" : "wht is php stands for ? 2",
-        "answer"   : ["php is a compiled language 2","php is not a language of programming 2","php is not a server side language 2","php is a server side language 2"],
-        "correct"   : [2,1]
+        "question" : "Les fichiers PHP ont l’extension …. ?",
+        "answer"   : [".html",".xml",".php",".ph"],
+        "correct"   : 3
     },
     {
-        "question" : "wht is php stands for ? 3",
-        "answer"   : ["php is not a language of programming 3","php is not a server side language 3","php is a server side language 3"],
+        "question" : "Les méthodes sont également appelées des_______?",
+        "answer"   : ["fonction membre","instances","objects","constructeurs"],
+        "correct"   : 1
+
+    },
+    {
+        "question" : "Quelle mot-clé empêche une méthode d’être redéfinie par une classe file?",
+        "answer"   : ["abstract","protected","final","static"],
         "correct"   : 3
 
     },
     {
-        "question" : "wht is php stands for ? 4",
-        "answer"   : ["php is a compiled language 4","php is not a language of programming 4","php is not a server side language 4","php is a server side language 4"],
-        "correct"   : 4
+        "question" : "Nous pouvons utiliser ___ pour commenter une seule ligne?",
+        "answer"   : ["/?","#","//","/* */"],
+        "correct"   : 3
+
+    },
+    {
+        "question" : "PHP est ?",
+        "answer"   : ["une language executer dans le serveur","une language executer au niveux de navigateur","pour sa execusion tu doit avoir un local serveur","tous les choix correct"],
+        "correct"   : [1,3]
 
     }
 

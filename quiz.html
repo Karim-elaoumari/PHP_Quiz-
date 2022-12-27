@@ -25,11 +25,11 @@
 .then((value)=>{
   switch (value){
     case "defeat":
-    sleep(1000).then(()=> {
+    setTimeout(() =>{
         move(29);
         var audio = new Audio('../../timer.mp3');
         audio.play();
-    });  
+}, 700);
       break;
     default:
     window.location.href ="index.html";

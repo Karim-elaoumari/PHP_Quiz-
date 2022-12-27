@@ -10,7 +10,7 @@ let arrRange=[];
 // variables globale-----------------------
 
 //  mover timer ---------------------------
-function move(deley) {
+let move= (deley) =>{
     
     let barTime = document.getElementById("BarTime");
     let width = 100;
@@ -24,8 +24,6 @@ function move(deley) {
         if (width <=0) {
             clearInterval(id_timer);
             timerfail();
-            
-            
             i = 0;
         } else {
             width-=smout;
@@ -40,12 +38,12 @@ function move(deley) {
 }
 
 //  adapt progress bar --------------------
-function adaptProgress(lenArr,done){
+let adaptProgress = (lenArr,done) =>{
   let progressRange = done*(100/lenArr)+"%";
   document.getElementById("Progress_bar").style.width=progressRange;
 }
 // ajax get questions  arr objects-----------------
-function getJson_data(){
+let getJson_data =() =>{
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
    if(this.readyState===4 && this.status===200){
@@ -60,7 +58,7 @@ function getJson_data(){
 }
 // ajax get questions  arr objects-----------------
 
-function showQuestion(arrObj){
+let showQuestion = (arrObj) =>{
        if(count<arrObj.length){
         correct =arrObj[range[count]].correct;
         document.getElementById("answers").innerHTML="";
@@ -132,7 +130,7 @@ function showQuestion(arrObj){
 getJson_data();
 
 //  randooomm---------------------------------------
-function randoom(max){
+let randoom =(max) =>{
 let newnum;
 for(let i=1;i<=max;i++){
  newnum =  Math.floor(Math.random() * (max));
@@ -143,18 +141,15 @@ for(let i=1;i<=max;i++){
  arrRange.push(newnum);
 }
 }
-//  randooomm---------------------------------------
-
 // end timer ---------------------------------------
-function timerfail(){
+let timerfail = ()=>{
   adaptProgress(arrObj.length,count);
-  sleep(500).then(() => {
-    move(29);
-    showQuestion(arrObj);
-});  
+  setTimeout(() => {move(29);
+                    showQuestion(arrObj);
+}, 100);
 }
-// end timer ---------------------------------------
-function checkAnswer(tag){
+// check answer ---------------------------------------
+let checkAnswer = (tag)=>{
  for(let i=1;i<=arrObj[range[count-1]].answer.length;i++){
   document.getElementById(i).setAttribute("onclick","");
  }
@@ -165,24 +160,19 @@ function checkAnswer(tag){
       tag.setAttribute("class", "color-fail card");
     }
   adaptProgress(arrObj.length,count);
-  sleep(700).then(() => {
-    if(count<arrObj.length){
+  setTimeout(() => {if(count<arrObj.length){
     move(29);}
     showQuestion(arrObj);
-});  
+}, 700);
 }
-// end timer ---------------------------------------
-
-
-
 // add cancel selected choices----------------------
-function addSelected(tag){
+let  addSelected = (tag)=>{
   selected.push(tag.id);
   tag.setAttribute("class", "color-selected card");
   tag.setAttribute("onclick", "cancelSelected(this)");
   console.log(selected);
 }
-function cancelSelected(tag){
+let  cancelSelected = (tag)=>{
   tag.setAttribute("class", "color-regular card");
   tag.setAttribute("onclick", "addSelected(this)");
   for(i in selected){
@@ -198,7 +188,7 @@ function cancelSelected(tag){
 
 
 // check selected choices---------------------------
-function checkMultiple(){
+let checkMultiple = ()=>{
   if(arrObj[range[count-1]].correct.sort().join() == selected.sort().join()){
     totalcorrect+=1;
     for(i of  selected){
@@ -217,11 +207,10 @@ function checkMultiple(){
     }
   }
   adaptProgress(arrObj.length,count);
-  sleep(700).then(() => {
-    if(count<arrObj.length){
+  setTimeout(() => { if(count<arrObj.length){
     move(29);}
     showQuestion(arrObj);
-});  
+}, 700);
 }
 // check selected choices---------------------------
 
