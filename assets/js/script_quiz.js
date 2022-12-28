@@ -72,7 +72,7 @@ let showQuestion = (arrObj) =>{
             `;
           }
           document.getElementById("answers").innerHTML+=`
-            <button onclick="checkMultiple()" class="btn-primary" id="mutiple">Next
+            <button onclick="checkMultiple()" id="btn_multi" onmouseover="moveleft()" class="btn-primary" id="mutiple">Next
             </button>
             `;
         }
@@ -150,14 +150,13 @@ let timerfail = ()=>{
 }
 // check answer ---------------------------------------
 let checkAnswer = (tag)=>{
- for(let i=1;i<=arrObj[range[count-1]].answer.length;i++){
-  document.getElementById(i).setAttribute("onclick","");
- }
+  stopclick();
   if(correct==tag.id){
     tag.setAttribute("class", "color-seccess card");
     totalcorrect+=1;
   }else{
       tag.setAttribute("class", "color-fail card");
+      document.getElementById(correct).setAttribute("class", "color-seccess card");
     }
   adaptProgress(arrObj.length,count);
   setTimeout(() => {if(count<arrObj.length){
@@ -170,25 +169,25 @@ let  addSelected = (tag)=>{
   selected.push(tag.id);
   tag.setAttribute("class", "color-selected card");
   tag.setAttribute("onclick", "cancelSelected(this)");
-  console.log(selected);
+  if(selected.length>=0){
+    document.getElementById("btn_multi").style="transition: margin 0.1s;transition-delay: 0.1s;";
+    document.getElementById("btn_multi").setAttribute("onmouseover","moveright()");
+  }
 }
 let  cancelSelected = (tag)=>{
   tag.setAttribute("class", "color-regular card");
   tag.setAttribute("onclick", "addSelected(this)");
   for(i in selected){
-    console.log(i)
     if(selected[i]==tag.id){
       selected.splice(i,1);
     }
   }
-  console.log(selected);
 }
 // add cancel selected choices----------------------
 
-
-
 // check selected choices---------------------------
 let checkMultiple = ()=>{
+    document.getElementById("btn_multi").style.display="none";
   if(arrObj[range[count-1]].correct.sort().join() == selected.sort().join()){
     totalcorrect+=1;
     for(i of  selected){
@@ -197,20 +196,48 @@ let checkMultiple = ()=>{
   }
   else{
     let corectar= arrObj[range[count-1]].correct
-    for(i of selected){
-        if(corectar.find(elem => elem ==i)){
-          document.getElementById(i).setAttribute("class", "color-seccess card");
-        }
-        else{
-          document.getElementById(i).setAttribute("class", "color-fail card");
-        }
+    let allCor_In= corectar.concat(selected);
+    console.log(allCor_In)
+    for(let i=1;i<=arrObj[range[count-1]].answer.length;i++){
+      if(!allCor_In.find(elem => elem ==i)){
+        document.getElementById(i).style.display='none';
+      }
     }
+    for(i of corectar){
+          document.getElementById(i).setAttribute("class", "color-seccess card");
+    }
+    for(i of selected){
+      if(corectar.find(elem => elem ==i)){
+        document.getElementById(i).setAttribute("class", "color-seccess card");
+      }
+      else{
+        document.getElementById(i).setAttribute("class", "color-fail card");
+      }
+  }
   }
   adaptProgress(arrObj.length,count);
   setTimeout(() => { if(count<arrObj.length){
     move(29);}
     showQuestion(arrObj);
-}, 700);
+}, 900);
+}
+
+function  moveleft(){
+  if(selected.length<=0){
+    document.getElementById("btn_multi").style="margin-left:14rem;transition: margin 0.1s;transition-delay: 0.1s;";
+    document.getElementById("btn_multi").setAttribute("onmouseover","moveright()");
+  }
+}
+function  moveright(){
+  if(selected.length<=0){
+    document.getElementById("btn_multi").style="margin-left:-14rem;transition: margin 0.1s;transition-delay: 0.1s;";
+    document.getElementById("btn_multi").setAttribute("onmouseover","moveleft()");
+  }
+}
+function stopclick(){
+  for(let i=1;i<=arrObj[range[count-1]].answer.length;i++){
+    document.getElementById(i).setAttribute("onclick","");
+   }
 }
 // check selected choices---------------------------
 
