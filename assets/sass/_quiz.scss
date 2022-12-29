@@ -21,7 +21,7 @@
   padding-bottom: 10px;
   @include change_width(40%);
   text-align: center;
-  margin-top: 30px;
+  margin-top: 0px;
   color: $color-secendry;
     
 }
@@ -37,6 +37,10 @@
     padding-bottom: 20px;
     color: rgb(245, 244, 248);
 }
+.title{
+  margin-top: -10px;
+  padding-top: 0px;
+}
 .card:active{
     box-shadow: $color-hidden 5px 5px 5px;
 }
@@ -45,7 +49,7 @@
     margin: auto;
     width:90%;
     @include change_width(40%);
-    height:1em;
+    height:0.7em;
     border: black 3px solid;
     position:relative;
     background-color:$color-hidden}
@@ -53,7 +57,7 @@
 .w3-round-xlarge{border-radius:16px}
 .question{
     color: $color-secendry;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 
@@ -107,7 +111,7 @@
   display: flex;
   align-items: center;
   width:90%;
-  height: 1em;
+  height: 0.7em;
   border: black 3px solid;
   background-color: $headline-color;
   margin: auto;
@@ -120,3 +124,100 @@
     background-color:$color-secendry;
     border-radius: 10px;
 }
+.mini-count{
+  background-color: rgb(175, 58, 242);
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 0px;
+  width:95%;
+  max-height: 4vh;
+  min-height: 4vh;
+  justify-content: space-between;
+  justify-items: center;
+  cursor: pointer;
+}
+.mini1-count{
+  background-color:rgb(199, 134, 236);
+  border-radius: 30px;
+  border-radius: 30px;
+ 
+  margin-top:3px;
+  width:32%;
+  max-height: 3vh;
+  min-height: 3vh;
+  box-shadow: inset 0 0 35px 5px rgb(199, 134, 236), inset 0 2px 1px 1px rgba(255,255,255,0.9), inset 0 -2px 1px 0 rgba(0,0,0,0.25)
+  
+  
+}
+.d-flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.content-left{
+  margin-left: 14%;
+  color: #ffffff;
+}
+.content-right{
+  margin-right: 14%;
+  color: aliceblue;
+}
+.mini2-count{
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  border-radius: 30px;
+  width:32%;
+  
+  margin-left:3px;
+  margin-top:3px;
+  width:32%;
+  max-height: 3vh;
+  min-height: 3vh;
+  box-shadow: inset 0 0 35px 5px rgb(199, 134, 236), inset 0 2px 1px 1px rgba(255,255,255,0.9), inset 0 -2px 1px 0 rgba(0,0,0,0.25)
+}
+.d-flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.content-center2{
+  margin: auto;
+  color: aliceblue;
+  padding-right: 10%;
+}
+.content-right{
+  margin-right: 14%;
+  color: aliceblue;
+  
+}
+.mini3-count{
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  border-radius: 30px;
+  width:32%;
+  
+  margin-right:3px;
+  margin-top:3px;
+  width:32%;
+  max-height: 3vh;
+  min-height: 3vh;
+  box-shadow: inset 0 0 35px 5px rgb(199, 134, 236), inset 0 2px 1px 1px rgba(255,255,255,0.9), inset 0 -2px 1px 0 rgba(0,0,0,0.25)
+}
+.content-center3{
+  margin: auto;
+  color: aliceblue;
+  padding-left: 10%;
+}
+.spani{
+  color: $color-secendry;
+  margin-top: 3px !important;
+}
+.hr{
+  background-color: #dee4df;
+  margin-top: 10px;
+}
+
+
+
+
+

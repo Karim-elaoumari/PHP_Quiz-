@@ -7,7 +7,8 @@ let correct=null;
 let totalcorrect=0;
 let selected=[];
 let arrRange=[];
-// variables globale-----------------------
+var fail = new Audio('../../fail.mp3');
+var success = new Audio('../../seccess.mp3');
 
 //  mover timer ---------------------------
 let move= (deley) =>{
@@ -143,6 +144,7 @@ for(let i=1;i<=max;i++){
 }
 // end timer ---------------------------------------
 let timerfail = ()=>{
+  fail.play();
   adaptProgress(arrObj.length,count);
   setTimeout(() => {move(29);
                     showQuestion(arrObj);
@@ -154,9 +156,11 @@ let checkAnswer = (tag)=>{
   if(correct==tag.id){
     tag.setAttribute("class", "color-seccess card");
     totalcorrect+=1;
+    success.play();
   }else{
       tag.setAttribute("class", "color-fail card");
       document.getElementById(correct).setAttribute("class", "color-seccess card");
+      fail.play();
     }
   adaptProgress(arrObj.length,count);
   setTimeout(() => {if(count<arrObj.length){
@@ -190,11 +194,13 @@ let checkMultiple = ()=>{
     document.getElementById("btn_multi").style.display="none";
   if(arrObj[range[count-1]].correct.sort().join() == selected.sort().join()){
     totalcorrect+=1;
+    success.play();
     for(i of  selected){
       document.getElementById(i).setAttribute("class", "color-seccess card");
     }
   }
   else{
+    fail.play();
     let corectar= arrObj[range[count-1]].correct
     let allCor_In= corectar.concat(selected);
     console.log(allCor_In)
@@ -219,9 +225,8 @@ let checkMultiple = ()=>{
   setTimeout(() => { if(count<arrObj.length){
     move(29);}
     showQuestion(arrObj);
-}, 900);
+}, 1000);
 }
-
 function  moveleft(){
   if(selected.length<=0){
     document.getElementById("btn_multi").style="margin-left:14rem;transition: margin 0.1s;transition-delay: 0.1s;";
@@ -240,6 +245,16 @@ function stopclick(){
    }
 }
 // check selected choices---------------------------
+
+function showquestion(){
+  document.getElementById("section1").style.display="none";
+  document.getElementById("section").style.display="block";
+}
+
+
+
+//
+
 
 
 

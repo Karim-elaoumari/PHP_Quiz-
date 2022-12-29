@@ -10,56 +10,39 @@
 </head>
 
 <body class="">
-    <script>
-        swal(`Instructions:
-             - Your have 30 sec to answer to question
-             - Your can't ignore a question
-             - There is some Questions that contain multiple choises
-             
-             Are you ready to Start ?`, {
-  buttons: {
-    cancel: "Run away",
-    defeat: "Start",
-  },
-})
-.then((value)=>{
-  switch (value){
-    case "defeat":
-    setTimeout(() =>{
-        move(29);
-        var audio = new Audio('../../timer.mp3');
-        audio.play();
-}, 700);
-      break;
-    default:
-    window.location.href ="index.html";
-  }
-});
-
-    </script>
     <header>
         <div class="brand-box">
             <span class="logo  font color-white">Quiz PHP</span>
         </div>
     </header>
-    <section class="section" >
-        <div class=" container center" id="section">
-            <h3 class="title">Quiz Progress</h3>
-            <div class="">
-                <div class="w3-progress-container w3-round-xlarge" style="margin-top:10px;">
-                    <div class="w3-progressbar w3-round-xlarge" id="Progress_bar"style="width:0%"></div>
-                </div>
-                 <p class="center margin-regulare">Timer:</p>
-                <div id="progressTime">
-                    <div id="BarTime"></div>
-                </div>
-                <div id="app"></div>
+    <section class="section">
+      <div class="mini-count d-flex"  id="quiz_move"><div class="mini2-count center" onclick="move_info()">Info</div><div class="center content-center2" onclick="move_quiz()">Quiz</div><div class="content-right" onclick="move_score()">Score</div></div>
+        <div class=" container center">
+            
+            <div id="section">
+              <h3 class="title">Quiz Progress</h3>
+             
+                      
+                          <div class="w3-progress-container w3-round-xlarge" style="margin-top:10px;">
+                              <div class="w3-progressbar w3-round-xlarge" id="Progress_bar"style="width:0%"></div>
+                          </div>
+                          <p class="center margin-regulare" style="margin-top:-1px;">Timer:</p>
+                          <div id="progressTime">
+                              <div id="BarTime"></div>
+                          </div>
+                          <hr class="hr">
+                    
+              <div class="question"style="font-size:20px" id="question"></div>
+              <div class="" id="answers"></div>
             </div>
-            <div class="question"style="font-size:20px" id="question"></div>
-            <div class="" id="answers">
+            <div id="section1">
+              
+            </div>
+            <div id="section2">
+              
             </div>
 
-        </div>
+      </div>
     </section>
   <section>
   </section>
