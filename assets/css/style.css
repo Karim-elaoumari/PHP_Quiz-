@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 * {
   padding: 0;
   margin: 0;
@@ -69,10 +70,10 @@
   width: 90%;
   border: black 3px solid;
   font-weight: 50px;
-  min-height: 60px;
+  min-height: 60px !important;
   border-radius: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   color: rgb(245, 244, 248);
 }
 
@@ -89,7 +90,7 @@
   margin-left: 10px;
   margin: auto;
   width: 90%;
-  height: 0.7em;
+  height: 1em;
   border: black 3px solid;
   position: relative;
   background-color: #ce93f5;
@@ -172,7 +173,7 @@
   display: flex;
   align-items: center;
   width: 90%;
-  height: 0.7em;
+  height: 1em;
   border: black 3px solid;
   background-color: #00214d;
   margin: auto;
@@ -186,23 +187,31 @@
   border-radius: 10px;
 }
 
-.mini-count {
-  background-color: rgb(175, 58, 242);
+.mini-count, .mini-count2 {
+  background-color: rgb(206, 56, 243);
   border-radius: 30px;
   margin: auto;
-  margin-top: 0px;
+  margin-top: 5px;
   width: 95%;
   max-height: 4vh;
   min-height: 4vh;
   justify-content: space-between;
   justify-items: center;
   cursor: pointer;
+  text-align: center;
+  opacity: 0.8;
+}
+@media screen and (min-width: 750px) {
+  .mini-count, .mini-count2 {
+    width: 37%;
+  }
 }
 
-.mini1-count {
+.miniAll-count, .mini1-count2, .mini3-count, .mini2-count, .mini1-count {
   background-color: rgb(199, 134, 236);
   border-radius: 30px;
   border-radius: 30px;
+  color: black;
   margin-top: 3px;
   width: 32%;
   max-height: 3vh;
@@ -227,16 +236,7 @@
 }
 
 .mini2-count {
-  background-color: rgb(255, 255, 255);
-  border-radius: 30px;
-  border-radius: 30px;
-  width: 32%;
   margin-left: 3px;
-  margin-top: 3px;
-  width: 32%;
-  max-height: 3vh;
-  min-height: 3vh;
-  box-shadow: inset 0 0 35px 5px rgb(199, 134, 236), inset 0 2px 1px 1px rgba(255, 255, 255, 0.9), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .d-flex {
@@ -257,16 +257,7 @@
 }
 
 .mini3-count {
-  background-color: rgb(255, 255, 255);
-  border-radius: 30px;
-  border-radius: 30px;
-  width: 32%;
   margin-right: 3px;
-  margin-top: 3px;
-  width: 32%;
-  max-height: 3vh;
-  min-height: 3vh;
-  box-shadow: inset 0 0 35px 5px rgb(199, 134, 236), inset 0 2px 1px 1px rgba(255, 255, 255, 0.9), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .content-center3 {
@@ -283,6 +274,29 @@
 .hr {
   background-color: #dee4df;
   margin-top: 10px;
+  height: 5px;
+  border: 0px;
+}
+
+.quiz {
+  height: 130px;
+}
+.quiz .cercle {
+  background-color: hsl(272deg, 74%, 38%);
+  width: 100%;
+  margin-top: -31px;
+  padding: 5px;
+  margin-left: 0px;
+  height: 70px;
+  font-size: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 0 1px 3px rgb(187, 88, 236) inset;
+}
+.quiz span {
+  margin-bottom: 40px;
+}
+.quiz p {
+  margin-top: 20px;
 }
 
 .logo {
@@ -376,6 +390,146 @@
 .btn-primary {
   background-color: #6949FF;
   font-size: 15px;
+}
+
+/* BASIC */
+.mini-count2 {
+  width: 60%;
+  margin-top: 30px;
+}
+@media screen and (min-width: 750px) {
+  .mini-count2 {
+    width: 40%;
+  }
+}
+
+.mini1-count2 {
+  margin-right: 4px;
+}
+
+a {
+  color: #92badd;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgb(187, 105, 243);
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  text-align: center;
+  border: 2px rgb(206, 56, 243) solid;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #56baed;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+  background-color: #39ace7;
+}
+
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  margin-top: 30px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+/* Simple CSS3 Fade-in Animation */
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56baed;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after {
+  width: 100%;
+}
+
+/* OTHERS */
+#icon {
+  width: 60%;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -206,7 +206,7 @@ let checkMultiple = ()=>{
     console.log(allCor_In)
     for(let i=1;i<=arrObj[range[count-1]].answer.length;i++){
       if(!allCor_In.find(elem => elem ==i)){
-        document.getElementById(i).style.display='none';
+        document.getElementById(i).style='opacity: 0.4;';
       }
     }
     for(i of corectar){
@@ -250,11 +250,16 @@ function showquestion(){
   document.getElementById("section1").style.display="none";
   document.getElementById("section").style.display="block";
 }
+function showmore(tag){
+   tag.style="height:15rem;transition: height 0.3s;";
+   tag.setAttribute('onclick','showless(this)');
+   
+}
+function showless(tag){
+  tag.style="transition: height 0.3s;";
+  tag.setAttribute('onclick','showmore(this)');
 
-
-
-//
-
+}
 
 
 

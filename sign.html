@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz | Start</title>
+   <link rel="stylesheet" href="assets/css/style.css">
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body class="">
+    <header>
+        <div class="brand-box">
+            <span class="logo  font color-white">Quiz PHP</span>
+        </div>
+    </header>
+    <section class="section">
+     
+        <div class=" container center" style="margin-top: 10px;">
+          <div class="mini-count2 d-flex"  id="quiz_move"><div class="mini2-count center" onclick="move_login()">Login</div><div class="center content-center2" onclick="move_signup()">Sign up</div></div>
+            
+            <div id="section3" >
+            
+              <div class="wrapper fadeInDown">
+                <div id="formContent">
+                 
+                  
+              
+                  <!-- Login Form -->
+                  <form>
+                    <input type="text"  class="fadeIn second" name="login" placeholder=" Your User Name">
+                    <input type="text" class="fadeIn third" name="login" placeholder=" Your Token Password">
+                    <input type="submit" class="btn btn-primary btn-animated font" value="Log In">
+                  </form>
+              
+                  <!-- Remind Passowrd -->
+                
+                </div>
+              </div>
+            </div>
+            <div id="section4" style="display: none;">
+              <div class="wrapper fadeInDown">
+                <div id="formContent">
+                 
+                  
+              
+                  <!-- Login Form -->
+                  <form>
+                    <input type="text"  class="fadeIn second" name="login" placeholder="User Name">
+                    <input type="text"  class="fadeIn third" name="login" placeholder="Token Password">
+                    <input type="submit" class="btn btn-primary btn-animated font" value="Sign up">
+                  </form>
+                  <!-- Remind Passowrd -->
+                </div>
+              </div>
+            </div>
+            </div>
+      </div>
+    </section>
+  <section>
+  </section>
+  <script src="assets/js/script_sign.js"></script>
+  
+</body>
+</html>

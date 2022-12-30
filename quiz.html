@@ -19,14 +19,14 @@
       <div class="mini-count d-flex"  id="quiz_move"><div class="mini2-count center" onclick="move_info()">Info</div><div class="center content-center2" onclick="move_quiz()">Quiz</div><div class="content-right" onclick="move_score()">Score</div></div>
         <div class=" container center">
             
-            <div id="section">
-              <h3 class="title">Quiz Progress</h3>
+            <div id="section" style="display: none;">
+              <h3 class="title1">Quiz Progress</h3>
              
                       
                           <div class="w3-progress-container w3-round-xlarge" style="margin-top:10px;">
                               <div class="w3-progressbar w3-round-xlarge" id="Progress_bar"style="width:0%"></div>
                           </div>
-                          <p class="center margin-regulare" style="margin-top:-1px;">Timer:</p>
+                        
                           <div id="progressTime">
                               <div id="BarTime"></div>
                           </div>
@@ -36,18 +36,20 @@
               <div class="" id="answers"></div>
             </div>
             <div id="section1">
+              <h3 class="title1">All Quizzes</h3>
+              <div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle">Quiz 1</div><p>Arrow functions in PHP</p></div>
+              <div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle" style="background-color: rgb(137, 23, 42);">Quiz 2</div><p>Arrow functions in PHP</p></div>
+              <div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle">Quiz 3</div><p>Arrow functions in PHP</p></div>
+              <div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle" style="background-color: rgb(137, 23, 42);">Quiz 4</div><p>Arrow functions in PHP</p></div>
               
             </div>
-            <div id="section2">
-              
+            <div id="section2" style="display: none;">
             </div>
-
       </div>
     </section>
   <section>
   </section>
   <script src="assets/js/script.js"></script>
   <script src="assets/js/script_quiz.js"></script>
-  
 </body>
 </html>
