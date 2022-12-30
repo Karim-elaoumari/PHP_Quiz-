@@ -1,3 +1,6 @@
+
+let quiz = document.getElementById('quiz_move')
+var children = quiz.children;
 let move_login = ()=>{
   children[0].setAttribute('class','mini2-count center');
   children[1].setAttribute('class','center content-center2');

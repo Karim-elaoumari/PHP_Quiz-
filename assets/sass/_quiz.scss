@@ -125,7 +125,7 @@
     border-radius: 10px;
 }
 .mini-count{
-  background-color: rgb(206, 56, 243);
+  background-color: rgb(85, 24, 228);
   border-radius: 30px;
   margin: auto;
   margin-top: 5px;
@@ -209,22 +209,22 @@
 
 .quiz{
   height:130px;
+  background-color: rgb(252, 250, 253);
+  color: #FF6E31;
   
   .cercle{
-    background-color: hsl(272, 74%, 38%);
-   
+    background-color:$color-secendry;
     width: 100%;
     margin-top: -31px;
     padding: 5px;
     margin-left: 0px;
     height: 70px;
-    font-size: 3rem;
+    color: #FF6E31;
+    font-size: 2rem;
     border-radius: 10px;
-    box-shadow: 0 0 1px 3px rgb(187, 88, 236) inset;
     
-   
   }
-  
+
   span{
     margin-bottom: 40px;
    
