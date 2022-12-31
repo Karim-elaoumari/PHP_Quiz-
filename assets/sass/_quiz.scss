@@ -210,21 +210,21 @@
   height:130px;
   background-color: rgb(252, 250, 253);
   color: #FF6E31;
-  .quiz:active{
-    box-shadow: none;
+ 
+    box-shadow: none !important;
 
-  }
+ 
   
   .cercle{
     background-color:rgb(48, 14, 58);
     width: 100%;
-    margin-top: -31px;
+    margin-top: -32px;
     padding: 5px;
     margin-left: 0px;
     height: 70px;
     color: #faf8f7;
     font-size: 2rem;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
     cursor: pointer;
     
   }
