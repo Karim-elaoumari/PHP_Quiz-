@@ -23,7 +23,6 @@
   text-align: center;
   margin-top: 0px;
   color: $color-secendry;
-    
 }
 .card{
     margin: auto;
@@ -211,9 +210,13 @@
   height:130px;
   background-color: rgb(252, 250, 253);
   color: #FF6E31;
+  .quiz:active{
+    box-shadow: none;
+
+  }
   
   .cercle{
-    background-color:$color-secendry;
+    background-color:$color-regulare;
     width: 100%;
     margin-top: -31px;
     padding: 5px;
