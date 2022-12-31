@@ -7,17 +7,14 @@ let correct=null;
 let totalcorrect=0;
 let selected=[];
 let arrRange=[];
-var fail = new Audio('../../fail.mp3');
-var success = new Audio('../../seccess.mp3');
-
+var fail = new Audio('fail.mp3');
+var success = new Audio('/seccess.mp3');
 //  mover timer ---------------------------
 let move= (deley) =>{
-    
     let barTime = document.getElementById("BarTime");
     let width = 100;
     let smout = 0.1;
     if(deley <10) smout = 0.1;
-
     newDellay = (deley*1000*smout)/100;
     clearInterval(id_timer);
     id_timer = setInterval(frame, newDellay);
@@ -37,7 +34,6 @@ let move= (deley) =>{
         }
     }
 }
-
 //  adapt progress bar --------------------
 let adaptProgress = (lenArr,done) =>{
   let progressRange = done*(100/lenArr)+"%";
@@ -54,7 +50,7 @@ let getJson_data =() =>{
     showQuestion(arrObj);
    }
   }
-  xhr.open("GET", "assets/js/data.json", true);
+  xhr.open("GET", "assets/php/classes/quiz.php?show=true", true);
   xhr.send();
 }
 // ajax get questions  arr objects-----------------
@@ -112,14 +108,12 @@ let showQuestion = (arrObj) =>{
         <img src="img/Frame-exelent.png" class="img_vector center"  alt="">
         <h3 class="center"> Exelent near to be Master</h3>
         `;
-
         }
         else{
           document.getElementById("section").innerHTML+=`
           <img src="img/Frame-boos.png" class="img_vector center"  alt="">
             <h3 class="center"> You are the Master</h3>
           `;
-
         }
         document.getElementById("section").innerHTML+=` <br>
         <a href="quiz.html" class="button-34"  role="button">Restart Quiz</a>
@@ -129,7 +123,6 @@ let showQuestion = (arrObj) =>{
       }
 }
 getJson_data();
-
 //  randooomm---------------------------------------
 let randoom =(max) =>{
 let newnum;
@@ -258,17 +251,47 @@ function showmore(tag){
   if(child!=tag){
     child.style="transition: height 0.3s;";
   child.setAttribute('onclick','showmore(this)');
-
   }
-  
   }
-   
 }
 function showless(tag){
   tag.style="transition: height 0.3s;";
   tag.setAttribute('onclick','showmore(this)');
-
 }
+let contain = document.getElementById('section2');
+let arrObjj =[];
+let getJson_data1 =() =>{
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+   if(this.readyState===4 && this.status===200){
+    arrObjj = JSON.parse(this.responseText);
+    makeit(arrObjj)
+    
+   }
+  }
+  xhr.open("GET", "assets/php/classes/quiz.php?show=true", false);
+  xhr.send();
+}
+getJson_data1();
+
+function makeit(arr){
+  console.log("zdfz");
+}
+let arrObjjj;
+let getJson_data2 =(data) =>{
+  const xhrr = new XMLHttpRequest();
+  xhrr.onreadystatechange = function() {
+   if(this.readyState===4 && this.status===200){
+    arrObjjj = JSON.parse(this.responseText);
+    console.log(arrObjjj);
+    contain.innerText=arrObjjj;
+   }
+  }
+  xhrr.open("GET", "assets/php/classes/quiz.php?data="+data, true);
+  xhrr.send();
+}
+getJson_data2(arrObjj[0].answers[1]);  
+
 
 
 
