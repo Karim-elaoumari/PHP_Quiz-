@@ -250,9 +250,18 @@ function showquestion(){
   document.getElementById("section1").style.display="none";
   document.getElementById("section").style.display="block";
 }
+let childrens = document.getElementsByClassName('quiz')
 function showmore(tag){
    tag.style="height:15rem;transition: height 0.3s;";
    tag.setAttribute('onclick','showless(this)');
+  for(child of childrens){
+  if(child!=tag){
+    child.style="transition: height 0.3s;";
+  child.setAttribute('onclick','showmore(this)');
+
+  }
+  
+  }
    
 }
 function showless(tag){
