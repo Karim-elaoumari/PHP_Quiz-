@@ -50,7 +50,7 @@ let getJson_data =() =>{
     showQuestion(arrObj);
    }
   }
-  xhr.open("GET", "assets/php/classes/quiz.php?show=true", true);
+  xhr.open("GET", "assets/php/controller/quiz.php?show_quiz=7", true);
   xhr.send();
 }
 // ajax get questions  arr objects-----------------
@@ -258,39 +258,7 @@ function showless(tag){
   tag.style="transition: height 0.3s;";
   tag.setAttribute('onclick','showmore(this)');
 }
-let contain = document.getElementById('section2');
-let arrObjj =[];
-let getJson_data1 =() =>{
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-   if(this.readyState===4 && this.status===200){
-    arrObjj = JSON.parse(this.responseText);
-    makeit(arrObjj)
-    
-   }
-  }
-  xhr.open("GET", "assets/php/classes/quiz.php?show=true", false);
-  xhr.send();
-}
-getJson_data1();
 
-function makeit(arr){
-  console.log("zdfz");
-}
-let arrObjjj;
-let getJson_data2 =(data) =>{
-  const xhrr = new XMLHttpRequest();
-  xhrr.onreadystatechange = function() {
-   if(this.readyState===4 && this.status===200){
-    arrObjjj = JSON.parse(this.responseText);
-    console.log(arrObjjj);
-    contain.innerText=arrObjjj;
-   }
-  }
-  xhrr.open("GET", "assets/php/classes/quiz.php?data="+data, true);
-  xhrr.send();
-}
-getJson_data2(arrObjj[0].answers[1]);  
 
 
 

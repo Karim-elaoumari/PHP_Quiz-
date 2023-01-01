@@ -28,10 +28,10 @@
                   
               
                   <!-- Login Form -->
-                  <form>
-                    <input type="text"  class="fadeIn second" name="login" placeholder=" Your User Name">
-                    <input type="text" class="fadeIn third" name="login" placeholder=" Your Token Password">
-                    <input type="submit" class="btn btn-primary btn-animated font" value="Log In">
+                  <form action="assets/php/controller/user.php" method="get">
+                    <input type="text"  class="fadeIn second" name="user_name" placeholder=" Your User Name">
+                    <input type="password" class="fadeIn third" name="token" placeholder=" Your Token Password">
+                    <input type="submit" name="login" class="btn btn-primary btn-animated font" value="Log In">
                   </form>
               
                   <!-- Remind Passowrd -->
@@ -45,11 +45,11 @@
                  
                   
               
-                  <!-- Login Form -->
-                  <form>
-                    <input type="text"  class="fadeIn second" name="login" placeholder="User Name">
-                    <input type="text"  class="fadeIn third" name="login" placeholder="Token Password">
-                    <input type="submit" class="btn btn-primary btn-animated font" value="Sign up">
+                  <!-- sign up Form -->
+                  <form action="assets/php/controller/user.php" method="get">
+                    <input type="text"  class="fadeIn second" name="user_name" placeholder="User Name">
+                    <input type="password"  class="fadeIn third" name="token" placeholder="Token Password">
+                    <input type="submit" name="signup" class="btn btn-primary btn-animated font" value="Sign up">
                   </form>
                   <!-- Remind Passowrd -->
                 </div>

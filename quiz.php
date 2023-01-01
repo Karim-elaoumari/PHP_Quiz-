@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+session_start();
+if(empty($_SESSION['user_id'])){
+  header('Location:sign.html');
+}
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,6 +43,7 @@
             </div>
             <div id="section1">
               <h3 class="title1">All Quizzes</h3>
+              <button class="btn btn-primary btn-animated font btn-start">create Quiz</button>
               <div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle">Quiz 3</div><p>Arrow functions in PHP</p><div class="container-score"><p class="d-flex socrers"><span>Top Scorer:</span><span>Your Score:</span></p><button class="btn btn-primary btn-animated font btn-start">start Quiz</button></div></div>
               <div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle">Quiz 3</div><p>Arrow functions in PHP</p><div class="container-score"><p class="d-flex socrers"><span>Top Scorer:</span><span>Your Score:</span></p><button class="btn btn-primary btn-animated font btn-start">start Quiz</button></div></div>
               <div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle">Quiz 3</div><p>Arrow functions in PHP</p><div class="container-score"><p class="d-flex socrers"><span>Top Scorer:</span><span>Your Score:</span></p><button class="btn btn-primary btn-animated font btn-start">start Quiz</button></div></div>
