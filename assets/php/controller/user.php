@@ -14,7 +14,6 @@ function signup(){
         $_SESSION['user_id']=$response;
         $_SESSION['user_name']=$_GET['user_name'];
         header('location:../../../quiz.php');
-
      }
      else{
         header('location:../../../sign.html');

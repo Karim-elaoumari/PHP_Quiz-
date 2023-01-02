@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : dim. 01 jan. 2023 à 15:59
--- Version du serveur : 10.4.25-MariaDB
--- Version de PHP : 8.1.10
+-- Host: 127.0.0.1
+-- Generation Time: Jan 02, 2023 at 08:59 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,47 +18,115 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `quiz_php`
+-- Database: `quiz_php`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `quiz`
+-- Table structure for table `options`
 --
 
-CREATE TABLE `quiz` (
+CREATE TABLE `options` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `rule` int(11) DEFAULT NULL,
-  `questions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`questions`)),
-  `user_id` int(11) DEFAULT NULL
+  `value` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `question_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `quiz`
+-- Dumping data for table `options`
 --
 
-INSERT INTO `quiz` (`id`, `name`, `rule`, `questions`, `user_id`) VALUES
-(7, 'karim', 1, '[{\"question\":\"Que signifie PHP?\",\"answer\":[\"PHP Hypertext Preprocessor\",\"Pretext Hypertext Processor\",\"Preprocessor Home Page\",\"Pretext Hypertext Processor\"],\"correct\":1},{\"question\":\"Les fichiers PHP ont lextension \\u2026. ?\",\"answer\":[\".html\",\".xml\",\".php\",\".ph\"],\"correct\":3}]', 1);
+INSERT INTO `options` (`id`, `value`, `status`, `question_id`) VALUES
+(1, 'Integers', 0, 1),
+(2, 'Doubles', 1, 1),
+(3, 'Booleans', 0, 1),
+(4, 'Strings', 0, 1),
+(5, 'Rasmus Lerdorf', 1, 2),
+(6, 'Willam Makepiece', 0, 2),
+(7, 'Davide Hium', 0, 2),
+(8, 'List Barely', 0, 2),
+(9, 'PHP remplit des fonctions système, c’est-à-dire à partir d’un fichier de système qu’il peut créer, ouvrir, lire, écrire et fermer.', 0, 3),
+(10, 'Vous ajoutez, supprimez, modifiez des éléments dans votre base de données via PHP.', 0, 3),
+(11, 'Tout les réponses sont vrais', 1, 3),
+(12, 'const', 1, 4),
+(13, 'constant', 0, 4),
+(14, 'define', 1, 4),
+(15, '#pragma', 0, 4);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `scores`
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `id` int(11) NOT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `quiz_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `value`, `quiz_id`) VALUES
+(1, ' Parmi les types de variables suivants, lesquels sont des nombres à virgule flottante, comme 2.121 ou 22.1?', 1),
+(2, 'Qui est le père de PHP?', 1),
+(3, ' Lequel des énoncés suivants est correct à propos de PHP?', 2),
+(4, ' Lequel des éléments suivants est utilisé pour déclarer une constante?', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quizzes`
+--
+
+CREATE TABLE `quizzes` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quizzes`
+--
+
+INSERT INTO `quizzes` (`id`, `name`) VALUES
+(1, 'Les bases – Partie 1'),
+(2, 'Les bases – Partie 2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scores`
 --
 
 CREATE TABLE `scores` (
   `id` int(11) NOT NULL,
-  `score` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `quiz_id` int(11) DEFAULT NULL
+  `score` int(11) DEFAULT NULL,
+  `quiz_id` int(11) DEFAULT NULL,
+  `scoring_date` datetime DEFAULT NULL,
+  `ip_adress` varchar(255) DEFAULT NULL,
+  `browser` varchar(255) DEFAULT NULL,
+  `operating_ses` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `scores`
+--
+
+INSERT INTO `scores` (`id`, `user_id`, `score`, `quiz_id`, `scoring_date`, `ip_adress`, `browser`, `operating_ses`) VALUES
+(1, 2, 2, 1, '2023-01-02 20:47:01', 'fcghj', 'ytdfydu', 'uffufu'),
+(2, 4, 6, 1, '2023-01-24 14:42:42', 'fufu', 'gyigyu', 'ugtyugfut'),
+(3, 3, 2, 1, '2023-01-17 14:44:45', 'hgfgcfcychch', 'hcghch', 'vgvghch'),
+(8, 2, 10, 2, '2023-01-02 20:20:14', '::1', 'Chrome', 'Windows');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -68,25 +136,40 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user_name`, `token`) VALUES
-(1, 'karim', '2023');
+(2, 'karim', '2023'),
+(3, 'saad', '1234'),
+(4, 'ali', '12345');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `quiz`
+-- Indexes for table `options`
 --
-ALTER TABLE `quiz`
+ALTER TABLE `options`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `question_id` (`question_id`);
 
 --
--- Index pour la table `scores`
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quiz_id` (`quiz_id`);
+
+--
+-- Indexes for table `quizzes`
+--
+ALTER TABLE `quizzes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `scores`
 --
 ALTER TABLE `scores`
   ADD PRIMARY KEY (`id`),
@@ -94,49 +177,65 @@ ALTER TABLE `scores`
   ADD KEY `quiz_id` (`quiz_id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `quiz`
+-- AUTO_INCREMENT for table `options`
 --
-ALTER TABLE `quiz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `options`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT pour la table `scores`
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `quizzes`
+--
+ALTER TABLE `quizzes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `scores`
 --
 ALTER TABLE `scores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- Constraints for dumped tables
+--
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for table `options`
 --
+ALTER TABLE `options`
+  ADD CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `quiz`
+-- Constraints for table `questions`
 --
-ALTER TABLE `quiz`
-  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `questions`
+  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `scores`
+-- Constraints for table `scores`
 --
 ALTER TABLE `scores`
   ADD CONSTRAINT `scores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `scores_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `scores_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

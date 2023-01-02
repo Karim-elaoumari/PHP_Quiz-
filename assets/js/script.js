@@ -21,7 +21,7 @@ let move_info = ()=>{
     quizz.style.display="none";
     score.style.display="none";
 }
-let move_quiz  = ()=>{
+let move_quiz  = (quiz_id)=>{
     children[0].setAttribute('class','content-left');
     children[1].setAttribute('class','mini1-count center');
     children[2].setAttribute('class','content-right');

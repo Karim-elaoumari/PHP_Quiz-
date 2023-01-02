@@ -1,14 +1,17 @@
 // variables globale-----------------------
 let id_timer;
 let arrObj=[];
+let quizinfo = [];
 let range=[];
 let count = 0;
 let correct=null;
 let totalcorrect=0;
 let selected=[];
 let arrRange=[];
-var fail = new Audio('fail.mp3');
-var success = new Audio('/seccess.mp3');
+let quiz_idd =null;
+let lastScore;
+
+
 //  mover timer ---------------------------
 let move= (deley) =>{
     let barTime = document.getElementById("BarTime");
@@ -39,28 +42,68 @@ let adaptProgress = (lenArr,done) =>{
   let progressRange = done*(100/lenArr)+"%";
   document.getElementById("Progress_bar").style.width=progressRange;
 }
+
 // ajax get questions  arr objects-----------------
-let getJson_data =() =>{
+let getQuiz_data =() =>{
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+   if(this.readyState===4 && this.status===200){
+    quizinfo = JSON.parse(this.responseText);
+    showQuiz_info(quizinfo);
+   }
+  }
+  xhr.open("GET", "assets/php/controller/quiz.php?show_quiz_info=true", false);
+  xhr.send();
+}
+let showQuiz_info = (quizinfo)=>{
+   let quizzesArea = document.getElementById('quizzes');
+   quizzesArea.innerHTML='';
+   let counterr =1;
+   for(let quiz of quizinfo){
+    if(quiz.score==undefined) quiz.score=0;
+    quizzesArea.innerHTML+=`<div onclick="showmore(this)" name="card" class="card color-regular  quiz" ><div class="cercle">Quiz ${counterr}</div><p>${quiz.name}</p><div class="container-score" id="rar${quiz.id}" value="${quiz.score}"><p class="d-flex socrers"><span>Top Scorer: ${quiz.best}</span><span id="score">Your Score: ${quiz.score}</span></p><button class="btn btn-primary btn-animated font btn-start" id="${quiz.id}" value="${quiz.score}" onclick="startquiz(this.id)">start Quiz</button></div></div>`;
+     counterr++;
+  }
+ 
+}
+
+
+let startquiz= (quiz_id) =>{
+  arrObj=[];
+  clearInterval(id_timer);
+  id_timer= null
+  range = [];
+  arrRange = [];
+  count = 0;
+  correct=null;
+  totalcorrect=0;
+  selected=[];
+  arrRange=[];
+  quiz_idd = quiz_id;
+  move(29)
+  
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
    if(this.readyState===4 && this.status===200){
     arrObj = JSON.parse(this.responseText);
     randoom(arrObj.length);
     range = arrRange;
+    adaptProgress(arrObj.length,0);
     showQuestion(arrObj);
+    move_quiz();
+    
    }
   }
-  xhr.open("GET", "assets/php/controller/quiz.php?show_quiz=7", true);
+  xhr.open("GET", "assets/php/controller/quiz.php?show_quiz="+quiz_idd, true);
   xhr.send();
 }
 // ajax get questions  arr objects-----------------
-
 let showQuestion = (arrObj) =>{
        if(count<arrObj.length){
         correct =arrObj[range[count]].correct;
         document.getElementById("answers").innerHTML="";
         document.getElementById("question").innerText =arrObj[range[count]].question;
-        if(Array.isArray(correct)){ 
+        if(correct.length>1){ 
           for(let i=0;i<arrObj[range[count]].answer.length;i++){
             document.getElementById("answers").innerHTML+=`
             <div onclick="addSelected(this)" name="card" class="card color-regular " id="${i+1}">
@@ -85,44 +128,58 @@ let showQuestion = (arrObj) =>{
         count++;
        }
       else{
-        document.getElementById("section").innerHTML=`<h2 class='center' style="margin-top:40px">You have finished Questions</h2>
+        document.getElementById("section2").innerHTML=`<h2 class='center' style="margin-top:40px">You have finished Questions</h2>
         <h3 style="color:green;margin-top:20px">Your score is : ${totalcorrect}/${arrObj.length}  </h3>
         <div style="margin-top:20px center">
         `;
         let corectRange = (totalcorrect*100)/arrObj.length;
         if(corectRange<=25){
-          document.getElementById("section").innerHTML+=`
+          document.getElementById("section2").innerHTML+=`
         <img src="img/Frame-focus.png" class="img_vector center"  alt="">
         <h3 class="center"> Focus more you can do it</h3>
         `;
 
         }else if(corectRange<=55){
-          document.getElementById("section").innerHTML+=`
+          document.getElementById("section2").innerHTML+=`
         <img src="img/Frame-good.png" class="img_vector center"  alt="">
         <h3 class="center"> Good job continue</h3>
         `;
 
         }
         else if(corectRange<=90){
-          document.getElementById("section").innerHTML+=`
+          document.getElementById("section2").innerHTML+=`
         <img src="img/Frame-exelent.png" class="img_vector center"  alt="">
         <h3 class="center"> Exelent near to be Master</h3>
         `;
         }
         else{
-          document.getElementById("section").innerHTML+=`
+          document.getElementById("section2").innerHTML+=`
           <img src="img/Frame-boos.png" class="img_vector center"  alt="">
             <h3 class="center"> You are the Master</h3>
           `;
         }
-        document.getElementById("section").innerHTML+=` <br>
-        <a href="quiz.html" class="button-34"  role="button">Restart Quiz</a>
-        <a href="index.html" class="button-34" style="margin-left:15px;" role="button">Home</a>
+        document.getElementById("section2").innerHTML+=` <br>
+        <a onclick="startquiz(${quiz_idd})" class="button-34"  role="button">Restart Quiz</a>
+        <a href="?logout=true" class="button-34"  role="button">Logout</a>
+        <a onclick="move_info()" class="button-34" style="margin-left:15px;" role="button">Home</a>
         </div>
         `;
+        clearInterval(id_timer);
+        lastScore = document.getElementById('rar'+quiz_idd).getAttribute('value');
+        console.log(lastScore);
+        if(lastScore<totalcorrect){
+          const xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+          if(this.readyState===4 && this.status===200){
+          }
+          }
+          xhr.open("GET", "assets/php/controller/quiz.php?setscore="+totalcorrect+"&quiz_id="+quiz_idd, true);
+          xhr.send();
+        }
+        move_score();
+        getQuiz_data();
       }
 }
-getJson_data();
 //  randooomm---------------------------------------
 let randoom =(max) =>{
 let newnum;
@@ -130,7 +187,6 @@ for(let i=1;i<=max;i++){
  newnum =  Math.floor(Math.random() * (max));
  while (arrRange.includes(newnum)){
   newnum =  Math.floor(Math.random() * (max));
-  
  }
  arrRange.push(newnum);
 }
@@ -149,10 +205,12 @@ let checkAnswer = (tag)=>{
   if(correct==tag.id){
     tag.setAttribute("class", "color-seccess card");
     totalcorrect+=1;
+    var success = new Audio('seccess.mp3');
     success.play();
   }else{
       tag.setAttribute("class", "color-fail card");
       document.getElementById(correct).setAttribute("class", "color-seccess card");
+      var fail = new Audio('fail.mp3');
       fail.play();
     }
   adaptProgress(arrObj.length,count);
@@ -187,12 +245,14 @@ let checkMultiple = ()=>{
     document.getElementById("btn_multi").style.display="none";
   if(arrObj[range[count-1]].correct.sort().join() == selected.sort().join()){
     totalcorrect+=1;
+    var success = new Audio('seccess.mp3');
     success.play();
     for(i of  selected){
       document.getElementById(i).setAttribute("class", "color-seccess card");
     }
   }
   else{
+    var fail = new Audio('fail.mp3');
     fail.play();
     let corectar= arrObj[range[count-1]].correct
     let allCor_In= corectar.concat(selected);
@@ -258,6 +318,7 @@ function showless(tag){
   tag.style="transition: height 0.3s;";
   tag.setAttribute('onclick','showmore(this)');
 }
+getQuiz_data();
 
 
 
