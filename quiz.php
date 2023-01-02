@@ -27,7 +27,7 @@ if(empty($_SESSION['user_id'])){
         </div>
     </header>
     <section class="section">
-      <div class="mini-count d-flex"  id="quiz_move"><div class="mini2-count center" onclick="move_info()">Info</div><div class="center content-center2" onclick="move_quiz()">Quiz</div><div class="content-right" onclick="move_score()">Score</div></div>
+      <div class="mini-count d-flex"  id="quiz_move"><div class="mini2-count center" onclick="move_info()">Home</div><div class="center content-center2" >Quiz</div><div class="content-right" >Score</div></div>
         <div class=" container center">
             
             <div id="section" style="display: none;">
